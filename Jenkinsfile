@@ -3,7 +3,7 @@ pipeline {
 
     tools {
         // Install the Maven version configured as "M3" and add it to the path.
-        maven "maven3.8"
+        mvnHome = tool 'maven3.8'
         env.PATH = env.PATH + ";c:\\Windows\\System32"
     }
 
@@ -17,7 +17,7 @@ pipeline {
                 //sh "mvn -Dmaven.test.failure.ignore=true clean package"
 
                 // To run Maven on a Windows agent, use
-                 bat "mvn -f Day1-BankApp\\pom.xml -Dmaven.test.failure.ignore=true clean package"
+                 bat(/"%MVN_HOME%\bin\mvn" -f Day1-BankApp\\pom.xml -Dmaven.test.failure.ignore clean package/)
             }
 
             post {
